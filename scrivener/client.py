@@ -6,8 +6,8 @@ from twisted.python import log
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.defer import Deferred, succeed
 
-from txScribe._thrift.scribe import scribe
-from txScribe._thrift.scribe import ttypes
+from scrivener._thrift.scribe import scribe
+from scrivener._thrift.scribe import ttypes
 
 
 class _NotifyingWrapperProtocol(Protocol):

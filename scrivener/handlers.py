@@ -4,7 +4,7 @@ from zope.interface import implements
 
 from twisted.python import log
 
-from txScribe.interfaces import ILogHandler
+from scrivener.interfaces import ILogHandler
 
 
 class TwistedLogHandler(object):

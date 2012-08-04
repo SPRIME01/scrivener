@@ -6,9 +6,9 @@ from thrift.transport import TTwisted
 from twisted.python import log
 from twisted.application.service import Service
 
-from txScribe._thrift.scribe import ttypes
-from txScribe._thrift.scribe import scribe
-from txScribe.interfaces import ILogHandler
+from scrivener._thrift.scribe import ttypes
+from scrivener._thrift.scribe import scribe
+from scrivener.interfaces import ILogHandler
 
 
 class _SimpleLogHandler(object):
