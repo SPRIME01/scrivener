@@ -14,7 +14,7 @@ class TwistedLogHandler(object):
         log.msg(message, system=category)
 
 
-class MultiCategoryHandler(object):
+class CategoryDispatchHandler(object):
     implements(ILogHandler)
 
     def __init__(self):

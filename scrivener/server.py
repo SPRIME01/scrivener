@@ -8,7 +8,6 @@ from twisted.application.service import Service
 
 from scrivener._thrift.scribe import ttypes
 from scrivener._thrift.scribe import scribe
-from scrivener.interfaces import ILogHandler
 
 
 class _SimpleLogHandler(object):
@@ -35,11 +34,10 @@ class ScribeServerService(Service):
         self._port = None
 
     def startService(self):
-        if ILogHandler.providedBy(self._handler):
-            handler = _SimpleLogHandler(self._handler)
-
-        elif scribe.IFace.providedBy(self._handler):
+        if scribe.Iface.providedBy(self._handler):
             handler = self._handler
+        else:
+            handler = _SimpleLogHandler(self._handler)
 
         self._processor = scribe.Processor(handler)
 
@@ -55,4 +53,5 @@ class ScribeServerService(Service):
         d.addCallback(_listening)
 
     def stopService(self):
-        return self._port.stopListening()
+        if self._port:
+            return self._port.stopListening()
