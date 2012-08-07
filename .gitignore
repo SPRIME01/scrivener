@@ -1,2 +1,5 @@
 dropin.cache
 *.pyc
+.coverage
+_trial_temp
+htmlcov
