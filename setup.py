@@ -8,7 +8,7 @@ def refresh_plugin_cache():
 setup(name='scrivener',
       version='0.1',
       description='Twisted Scribe Client/Server',
-      packages=['scrivener'],
+      packages=['scrivener', 'scrivener._thrift', 'scrivener.tests'],
       package_data={'twisted': ['plugins/scribe_tap.py']})
 
 refresh_plugin_cache()
