@@ -22,6 +22,9 @@ class _LossNotifyingWrapperProtocol(Protocol):
         self.wrapped.connectionLost(reason)
         self._on_connectionLost(reason)
 
+    def connectionMade(self):
+        self.wrapped.makeConnection(self.transport)
+
 
 class _ThriftClientFactory(Factory):
     def __init__(self, client_class, on_connectionLost):
@@ -56,7 +59,7 @@ class ScribeClient(object):
 
     def _connection_made(self, client):
         self._state = 'CONNECTED'
-        self._client = client
+        self._client = client.wrapped
         while self._waiting:
             d = self._waiting.pop(0)
             d.callback(self._client)
@@ -80,8 +83,7 @@ class ScribeClient(object):
         if self._state == 'NOT_CONNECTED':
             self._state = 'CONNECTING'
             d = self._scribe_endpoint.connect(self._client_factory)
-            d.addErrback(self._connection_failed)
-            d.addCallback(self._connection_made)
+            d.addCallbacks(self._connection_made, self._connection_failed)
             return d
         elif self._state == 'CONNECTING':
             return self._notify_connected()
