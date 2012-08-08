@@ -1,4 +1,5 @@
 from distutils.core import setup
+from twisted.python.dist import getPackages
 
 
 def refresh_plugin_cache():
@@ -8,7 +9,7 @@ def refresh_plugin_cache():
 setup(name='scrivener',
       version='0.1',
       description='Twisted Scribe Client/Server',
-      packages=['scrivener', 'scrivener._thrift', 'scrivener.tests'],
+      packages=getPackages('scrivener'),
       package_data={'twisted': ['plugins/scribe_tap.py']})
 
 refresh_plugin_cache()
