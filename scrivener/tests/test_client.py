@@ -12,9 +12,10 @@ class ScribeClientTests(TestCase):
         self.client_proto = mock.Mock()
 
         def _connect(factory):
-            self.client_proto = mock.Mock()
+            wrapper = mock.Mock()
+            wrapper.wrapped = self.client_proto
             self.client_proto.client.Log.return_value = ttypes.ResultCode.OK
-            return succeed(self.client_proto)
+            return succeed(wrapper)
 
         self.endpoint.connect.side_effect = _connect
 
