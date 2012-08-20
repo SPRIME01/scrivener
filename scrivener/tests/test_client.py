@@ -84,3 +84,23 @@ class ScribeClientTests(TestCase):
         self.assertEqual(self.assertFired(d2), ttypes.ResultCode.OK)
 
         self.assertEqual(self.client_proto.client.Log.call_count, 2)
+
+    def test_log_string(self):
+        client = ScribeClient(self.endpoint)
+
+        d = client.log('category', 'message')
+
+        self.assertEqual(self.assertFired(d), ttypes.ResultCode.OK)
+        self.client_proto.client.Log.assert_called_with(
+            [ttypes.LogEntry('category', 'message')])
+
+    def test_log_multiple_messages(self):
+        client = ScribeClient(self.endpoint)
+
+        d = client.log('category', ['message1', 'message2'])
+
+        self.assertEqual(self.assertFired(d), ttypes.ResultCode.OK)
+
+        self.client_proto.client.Log.assert_called_with(
+            [ttypes.LogEntry('category', 'message1'),
+             ttypes.LogEntry('category', 'message2')])

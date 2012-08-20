@@ -105,6 +105,9 @@ class ScribeClient(object):
             return succeed(self._client)
 
     def log(self, category, messages):
+        if isinstance(messages, basestring):
+            messages = [messages]
+
         entries = [ttypes.LogEntry(category, message) for message in messages]
 
         def _log(client):
