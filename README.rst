@@ -1,7 +1,7 @@
 scrivener: A twisted scribe client/server.
 ==========================================
 
-scrivener is a Scribe_ client/server framework for use with Twisted applications.
+scrivener is a Scribe_ client/server framework for use with Twisted_ applications.
 
 Client API
 ----------
