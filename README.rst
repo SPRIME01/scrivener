@@ -6,7 +6,7 @@ scrivener is a Scribe_ client/server framework for use with Twisted applications
 Client API
 ----------
 
-::
+.. code-block:: python
 
     from twisted.internet import reactor
     from twisted.internet.endpoints import TCP4ClientEndpoint
@@ -26,7 +26,7 @@ Client API
 Server API
 ----------
 
-::
+.. code-block:: python
 
     import sys
     from twisted.internet import reactor
