@@ -84,14 +84,16 @@ class ScribeClient(object):
         self._client = None
         log.err(
             reason,
-            "Connection lost to scribe server: {0}".format(self._scribe_endpoint))
+            "Connection lost to scribe server: {0}".format(
+                self._scribe_endpoint))
 
     def _connection_failed(self, reason):
         self._state = 'NOT_CONNECTED'
         self._client = None
         log.err(
             reason,
-            "Could not connect to scribe server: {0}".format(self._scribe_endpoint))
+            "Could not connect to scribe server: {0}".format(
+                self._scribe_endpoint))
 
     def _get_client(self):
         if self._state == 'NOT_CONNECTED':
