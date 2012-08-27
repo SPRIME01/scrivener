@@ -46,9 +46,11 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Framework :: Twisted'
     ],
+    maintainer='David Reid',
+    maintainer_email='david.reid@rackspace.com',
     license='APL2',
     url='https://github.com/racker/scrivener/',
-
+    long_description=open('README.rst').read(),
     packages=getPackages('scrivener') + ['twisted.plugins'],
     install_requires=['Twisted', 'thrift'],
 )
