@@ -1,3 +1,4 @@
+import os
 from setuptools import setup
 
 # When pip installs anything from packages, py_modules, or ext_modules that
@@ -34,11 +35,22 @@ else:
 
     egg_info.write_toplevel_names = _hacked_write_toplevel_names
 
-from twisted.python.dist import getPackages
+
+def getPackages(base):
+    packages = []
+
+    def visit(arg, directory, files):
+        if '__init__.py' in files:
+            packages.append(directory.replace('/', '.'))
+
+    os.path.walk(base, visit, None)
+
+    return packages
+
 
 setup(
     name='scrivener',
-    version='0.1',
+    version='0.2',
     description='Twisted Scribe Client/Server',
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -52,7 +64,7 @@ setup(
     url='https://github.com/racker/scrivener/',
     long_description=open('README.rst').read(),
     packages=getPackages('scrivener') + ['twisted.plugins'],
-    install_requires=['Twisted', 'thrift'],
+    install_requires=['Twisted >= 12.0.0', 'thrift == 0.8.0', 'mock'],
 )
 
 # Make Twisted regenerate the dropin.cache, if possible.  This is necessary
