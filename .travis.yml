@@ -3,10 +3,17 @@ python:
     - '2.6'
     - '2.7'
     - pypy
+
+env:
+  - TWISTED_VERSION=12.0.0
+  - TWISTED_VERSION=12.1.0
+  - TWISTED_VERSION=12.2.0
+
 install:
   - pip install pep8 pyflakes
-  - pip install Twisted
+  - pip install Twisted==$TWISTED_VERSION
   - pip install -r requirements.txt
+
 script:
   - pep8 --exclude='_thrift' scrivener
   - find scrivener -not -path '*/_thrift*' -name '*.py' | xargs pyflakes
