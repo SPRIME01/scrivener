@@ -10,9 +10,9 @@ env:
   - TWISTED_VERSION=12.2.0
 
 install:
-  - pip install pep8 pyflakes
-  - pip install Twisted==$TWISTED_VERSION
-  - pip install -r requirements.txt
+  - pip install pep8 pyflakes --use-mirrors
+  - pip install Twisted==$TWISTED_VERSION --use-mirrors
+  - pip install -r requirements.txt --use-mirrors
 
 script:
   - pep8 --exclude='_thrift' scrivener
